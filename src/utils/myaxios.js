@@ -4,6 +4,8 @@ import axios from 'axios'
 import { Toast } from 'vant'
 // 定义一个baseURL
 axios.defaults.baseURL = 'http://127.0.0.1:3000'
+// 将基准路径存起来
+localStorage.setItem('baseURL', 'http://127.0.0.1:3000')
 
 // 添加拦截器
 // 请求拦截器
@@ -22,7 +24,7 @@ axios.interceptors.request.use(function (config) {
 
 // 响应拦截器
 axios.interceptors.response.use(function (response) {
-  console.log(response)
+  // console.log(response)
   // 在响应的时候如果没有token值就需要重定向到login页面
   if (response.data.message === '用户信息验证失败') {
     // 提示用户
