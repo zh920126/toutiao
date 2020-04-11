@@ -47,8 +47,17 @@ export default {
           type: 'success',
           message: '登录成功'
         })
+        // 将获取到token存到本地存储中去
+        // console.log(res)
+        localStorage.setItem('toutiao-Authorization', res.data.data.token)
         // 跳转到个人中心页面,并将用户的ID号传过去
-        this.$router.push({ path: `Personal/${res.data.data.user.id}` })
+        this.$router.push({ path: `personal/${res.data.data.user.id}` })
+      } else {
+        // 登录失败提示用户
+        Toast({
+          type: 'fail',
+          message: '登录失败，请重试'
+        })
       }
     },
     // 接收子组件传递来的数据

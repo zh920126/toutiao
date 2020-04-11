@@ -31,5 +31,22 @@ const router = new VueRouter({
     }
   ]
 })
+
+// 添加导航守卫
+router.beforeEach((to, from, next) => {
+  // console.log(to)
+  // console.log(from)
+  // 对进入需要验证token的用户页面时,先验证token
+  if (to.path.includes('/personal')) {
+    const token = localStorage.getItem('toutiao-Authorization')
+    if (token) {
+      next()
+    } else {
+      next({ name: 'Login' })
+    }
+  } else {
+    next()
+  }
+})
 // 向外暴露
 export default router

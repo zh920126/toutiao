@@ -18,3 +18,14 @@ export const register = (data) => {
     data
   })
 }
+
+// 根据ID来获取用户的数据
+export const getUserInfoById = (id) => {
+  return axios({
+    method: 'get',
+    // 需要验证token,必须在请求头中设置
+    // 在拦截器里面已经添加了token值，因此路由中就不需要再次添加了
+    // headers: { Authorization: localStorage.getItem('toutiao-Authorization') },
+    url: `/user/${id}`
+  })
+}

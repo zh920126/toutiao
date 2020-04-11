@@ -14,11 +14,42 @@
         <span class="iconfont iconjiantou1"></span>
       </div>
     </router-link>
+    <mycell title="我的关注" desc="关注的用户"></mycell>
+    <mycell title="我的跟帖" desc="跟帖/回复"></mycell>
+    <mycell title="我的收藏" desc="文章/视频"></mycell>
+    <mycell title="设置" desc=""></mycell>
   </div>
 </template>
 
 <script>
-export default {}
+// 引入mycell组件
+import mycell from '@/components/mycell.vue'
+// 引入myaxios
+import { getUserInfoById } from '../apis/user.js'
+export default {
+  data () {
+    return {
+      userInfo: {}
+    }
+  },
+  components: {
+    mycell
+  },
+  async created () {
+    // 刚一进入页面就需要获取到用户的ID来获取用户的数据进行页面的渲染
+    // console.log(this.$route)
+    const id = this.$route.params.id
+    // console.log(id)
+    // 根据ID来获取用户的详细信息，进行页面的渲染
+    const res = await getUserInfoById(id)
+    // console.log(res)
+    if (res.data.message === '获取成功') {
+      // 当获取用户数据成功后，渲染页面
+      this.userInfo = res.data.data
+    }
+    // console.log(this.userinfo)
+  }
+}
 </script>
 
 <style lang='less' scoped>
