@@ -55,7 +55,20 @@
       />
     </van-cell-group>
     </van-dialog>
-    <mycell title="性别" :desc="userInfo.gender===1?'男':'女'"></mycell>
+    <mycell title="性别" :desc="userInfo.gender===0?'女':'男'" @click="showgender=true"></mycell>
+     <van-dialog
+    v-model="showgender"
+    title="修改性别"
+    show-cancel-button
+    :closeOnClickOverlay='true'
+    @confirm="updategender"
+    >
+    <van-picker
+    :columns="columns"
+    @change="changegender"
+    :default-index="userInfo.gender"
+    />
+    </van-dialog>
   </div>
 </template>
 
@@ -85,10 +98,32 @@ export default {
       // 修改密码的数据
       showpassword: false,
       newpassowrd: '',
-      passowrd: ''
+      passowrd: '',
+      // 修改性别
+      showgender: false,
+      newgender: '',
+      columns: ['女', '男']
     }
   },
   methods: {
+    // 修改性别
+    async updategender () {
+      const res = await updateUserInfo(this.id, { gender: this.newgender })
+      console.log(res)
+      if (res.data.message === '修改成功') {
+        // 提示用户
+        Toast({
+          type: 'success',
+          message: '修改成功'
+        })
+        // 同时改变页面的显示
+        this.userInfo.gender = this.newgender
+      }
+    },
+    // onchange时获取最后选择的index
+    changegender (picker, value, index) {
+      this.newgender = index
+    },
     // 关闭密码框之前
     beforeclose (action, done) {
       // 用户提交之前进行判断

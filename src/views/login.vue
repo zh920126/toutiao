@@ -3,7 +3,7 @@
     <!-- 顶部灰色条 -->
     <div class="top"></div>
     <!-- 顶部X图标 -->
-    <div class="close">
+    <div class="close" @click="gotoindex">
       <img src="@/../public/u338.png" alt />
     </div>
     <!-- 中间logo图 -->
@@ -59,6 +59,9 @@ export default {
           message: '登录失败，请重试'
         })
       }
+    },
+    gotoindex () {
+      this.$router.push({ name: 'Index' })
     },
     // 接收子组件传递来的数据
     getmessage (data) {

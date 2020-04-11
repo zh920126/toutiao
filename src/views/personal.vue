@@ -7,7 +7,8 @@
         <img :src="userInfo.head_img" alt />
         <div class="profile-center">
           <div class="name">
-            <span class="iconfont iconxingbienan"></span>{{userInfo.nickname}}
+            <span class="iconfont iconxingbienan"></span>
+            {{userInfo.nickname}}
           </div>
           <div class="time">{{userInfo.time |myfilter}}</div>
         </div>
@@ -17,7 +18,11 @@
     <mycell title="我的关注" desc="关注的用户"></mycell>
     <mycell title="我的跟帖" desc="跟帖/回复"></mycell>
     <mycell title="我的收藏" desc="文章/视频"></mycell>
-    <mycell title="设置" desc=""></mycell>
+    <mycell title="设置" desc></mycell>
+    <div class="bottom">
+      <p @click="logout">退出登录</p>
+      <p @click="back">返回首页</p>
+    </div>
   </div>
 </template>
 
@@ -32,6 +37,17 @@ export default {
   data () {
     return {
       userInfo: {}
+    }
+  },
+  methods: {
+    // 退出登录时
+    logout () {
+      // 先删除token,然后再返回index页面
+      localStorage.removeItem('toutiao-Authorization')
+      this.$router.push({ name: 'Index' })
+    },
+    back () {
+      this.$router.push({ name: 'Index' })
     }
   },
   filters: {
@@ -55,7 +71,8 @@ export default {
       this.userInfo.id = id
       // 对用户的图片进行参数的拼接，如果没有则给回一个默认的值
       if (this.userInfo.head_img) {
-        this.userInfo.head_img = localStorage.getItem('baseURL') + this.userInfo.head_img
+        this.userInfo.head_img =
+          localStorage.getItem('baseURL') + this.userInfo.head_img
       } else {
         this.userInfo.head_img = './u339.png'
       }
@@ -65,17 +82,17 @@ export default {
 </script>
 
 <style lang='less' scoped>
-.personal{
-    width: 100vw;
-    height: 100vh;
-    background-color: #eee;
+.personal {
+  width: 100vw;
+  height: 100vh;
+  background-color: #eee;
 }
 .top {
-    height: 30px;
-    background: #757575;
-  }
-a{
-    color: #666;
+  height: 30px;
+  background: #757575;
+}
+a {
+  color: #666;
 }
 .profile {
   display: flex;
@@ -105,6 +122,24 @@ a{
     color: #666;
     font-size: 14px;
     margin-top: 5px;
+  }
+}
+.bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 30/360 * 100vw;
+  p {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: green;
+    &:first-child{
+      margin: 0px 5px;
+    }
   }
 }
 </style>
