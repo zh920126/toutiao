@@ -1,5 +1,5 @@
 <template>
-  <div class="cell">
+  <div class="cell" @click="hanldeclick">
     <span>{{title}}</span>
     <span class="user">{{type==='password'?'******':desc}}&gt;</span>
   </div>
@@ -11,6 +11,11 @@ export default {
   data () {
     return {
 
+    }
+  },
+  methods: {
+    hanldeclick (e) {
+      this.$emit('click', e)
     }
   }
 }
