@@ -86,7 +86,7 @@ export default {
           message: '注册成功'
         })
         // 然后跳转到登录页面
-        this.$router.push({ name: 'Longin' })
+        this.$router.push({ name: 'Login' })
       } else {
         Toast.fail({
           message: '注册失败，请重试'

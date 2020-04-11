@@ -14,11 +14,6 @@ const router = new VueRouter({
   routes: [
     // 配置详细的路由信息
     {
-      name: 'default',
-      path: '/',
-      redirect: { name: 'Login' }
-    },
-    {
       name: 'Login',
       path: '/login',
       component: Login

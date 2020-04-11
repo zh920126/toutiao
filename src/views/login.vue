@@ -30,8 +30,8 @@ export default {
   data () {
     return {
       userInfo: {
-        username: '',
-        password: ''
+        username: '14444444444',
+        password: '111'
       }
     }
   },
