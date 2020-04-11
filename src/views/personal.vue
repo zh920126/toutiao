@@ -1,7 +1,7 @@
 <template>
   <div class="personal">
     <div class="top"></div>
-    <router-link to="/edit_profile">
+    <router-link :to="'/edit_profile/'+userInfo.id">
       <div class="profile">
         <!-- $axios.defaults.baseURL读取axios的服务器路径 -->
         <img :src="userInfo.head_img" alt />
@@ -47,16 +47,17 @@ export default {
     // console.log(id)
     // 根据ID来获取用户的详细信息，进行页面的渲染
     const res = await getUserInfoById(id)
-    console.log(res)
+    // console.log(res)
     if (res.data.message === '获取成功') {
       // 当获取用户数据成功后，渲染页面
       this.userInfo = res.data.data
       this.userInfo.time = new Date()
+      this.userInfo.id = id
       // 对用户的图片进行参数的拼接，如果没有则给回一个默认的值
       if (this.userInfo.head_img) {
         this.userInfo.head_img = localStorage.getItem('baseURL') + this.userInfo.head_img
       } else {
-        this.userInfo.head_img = './u338.png'
+        this.userInfo.head_img = './u339.png'
       }
     }
   }

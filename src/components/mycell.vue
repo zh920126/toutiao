@@ -1,13 +1,13 @@
 <template>
   <div class="cell">
     <span>{{title}}</span>
-    <span class="user">{{desc}}&gt;</span>
+    <span class="user">{{type==='password'?'******':desc}}&gt;</span>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['title', 'desc'],
+  props: ['title', 'desc', 'type'],
   data () {
     return {
 

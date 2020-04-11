@@ -32,7 +32,7 @@ const router = new VueRouter({
     },
     {
       name: 'EditProfile',
-      path: '/edit_profile',
+      path: '/edit_profile/:id',
       component: EditProfile
     }
   ]
