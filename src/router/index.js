@@ -7,6 +7,7 @@ import VueRouter from 'vue-router'
 // 引入组件
 import Login from '@/views/login.vue'
 import Register from '@/views/register.vue'
+import Personal from '@/views/personal.vue'
 // 将路由挂载在vue实例上
 Vue.use(VueRouter)
 const router = new VueRouter({
@@ -22,6 +23,11 @@ const router = new VueRouter({
       name: 'Register',
       path: '/register',
       component: Register
+    },
+    {
+      name: 'Personal',
+      path: '/personal/:id',
+      component: Personal
     }
   ]
 })

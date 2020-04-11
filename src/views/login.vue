@@ -26,6 +26,8 @@
 import inp from '../components/myinput.vue'
 // 引入封装好的axios
 import { login } from '../apis/user.js'
+// 引入vant中的提示组件
+import { Toast } from 'vant'
 export default {
   data () {
     return {
@@ -36,14 +38,18 @@ export default {
     }
   },
   methods: {
-    login () {
-      login(this.userInfo)
-        .then(res => {
-          console.log(res)
+    async login () {
+      const res = await login(this.userInfo)
+      // console.log(res)
+      if (res.data.message === '登录成功') {
+        // 当登录成功 时，就需要提示用户
+        Toast({
+          type: 'success',
+          message: '登录成功'
         })
-        .catch(err => {
-          console.log(err)
-        })
+        // 跳转到个人中心页面,并将用户的ID号传过去
+        this.$router.push({ path: `Personal/${res.data.data.user.id}` })
+      }
     },
     // 接收子组件传递来的数据
     getmessage (data) {
