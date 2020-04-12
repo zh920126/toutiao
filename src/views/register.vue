@@ -7,6 +7,10 @@
     <myinput placeholder="请输入手机号" type="text" v-model="userInfo.username" :rules="/^1\d{10}$/"></myinput>
     <myinput placeholder="请输入昵称" type="text" v-model="userInfo.nickname"></myinput>
     <myinput placeholder="请输入密码" type="password" v-model="userInfo.password"></myinput>
+    <div class="reg">
+      <span>有账号？</span>
+      <a href="#/login">去登录</a>
+    </div>
     <p @click="register" class="btn">注册</p>
   </div>
 </template>
@@ -108,6 +112,11 @@ export default {
   .top {
     height: 30px;
     background: #757575;
+  }
+  .reg{
+    width: 60%;
+    margin: auto;
+    text-align: right;
   }
   .logo {
     margin: 100px auto 0;

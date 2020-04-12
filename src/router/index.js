@@ -10,12 +10,18 @@ import Register from '@/views/register.vue'
 import Personal from '@/views/personal.vue'
 import EditProfile from '@/views/edit_profile.vue'
 import Index from '@/views/index.vue'
+import Search from '@/views/search.vue'
 // 将路由挂载在vue实例上
 Vue.use(VueRouter)
 const router = new VueRouter({
   // 配置路由信息routes
   routes: [
     // 配置详细的路由信息
+    {
+      name: 'default',
+      path: '/',
+      redirect: { name: 'Index' }
+    },
     {
       name: 'Login',
       path: '/login',
@@ -40,6 +46,11 @@ const router = new VueRouter({
       name: 'Index',
       path: '/index',
       component: Index
+    },
+    {
+      name: 'Search',
+      path: '/search',
+      component: Search
     }
   ]
 })

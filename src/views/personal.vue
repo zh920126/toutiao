@@ -44,6 +44,7 @@ export default {
     logout () {
       // 先删除token,然后再返回index页面
       localStorage.removeItem('toutiao-Authorization')
+      localStorage.removeItem('toutiao_id')
       this.$router.push({ name: 'Index' })
     },
     back () {

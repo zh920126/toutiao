@@ -50,6 +50,7 @@ export default {
         // 将获取到token存到本地存储中去
         // console.log(res)
         localStorage.setItem('toutiao-Authorization', res.data.data.token)
+        localStorage.setItem('toutiao_id', res.data.data.user.id)
         // 跳转到个人中心页面,并将用户的ID号传过去
         this.$router.push({ path: `personal/${res.data.data.user.id}` })
       } else {

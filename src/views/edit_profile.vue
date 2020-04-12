@@ -149,7 +149,13 @@ export default {
     async updatepassword () {
       // console.log(123)
       const res = await updateUserInfo(this.id, { password: this.newpassowrd })
-      console.log(res)
+      // console.log(res)
+      if (res.data.message === '修改成功') {
+        Toast({
+          type: 'success',
+          message: '修改成功'
+        })
+      }
     },
     // 修改昵称
     async updatenick () {
