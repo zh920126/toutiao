@@ -33,7 +33,7 @@
         >
         <!-- 下拉刷新 -->
         <van-pull-refresh v-model="value.isLoading" @refresh="onRefresh">
-          <articel v-for="(sv,si) in value.artList" :key="si" :post="sv" @click="toDetail"></articel>
+          <articel v-for="(sv,si) in value.artList" :key="si" :post="sv" @click="$router.push({path:`/detail/${sv.id}`})"></articel>
         </van-pull-refresh>
 
         </van-list>

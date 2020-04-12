@@ -17,3 +17,33 @@ export const getOnecategory = (params) => {
     params
   })
 }
+// 根据文章的ID来获取文章的详情
+export const getDetailById = (id) => {
+  return axios({
+    method: 'get',
+    url: `/post/${id}`
+  })
+}
+
+// 关注用户
+export const userFollow = (id) => {
+  return axios({
+    method: 'get',
+    url: `/user_follows/${id}`
+  })
+}
+
+// 取消用户关注
+export const unuserFollow = (id) => {
+  return axios({
+    method: 'get',
+    url: `/user_unfollow/${id}`
+  })
+}
+// 点赞文章
+export const postlike = (id) => {
+  return axios({
+    method: 'get',
+    url: `/post_like/${id}`
+  })
+}

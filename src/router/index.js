@@ -11,6 +11,7 @@ import Personal from '@/views/personal.vue'
 import EditProfile from '@/views/edit_profile.vue'
 import Index from '@/views/index.vue'
 import Search from '@/views/search.vue'
+import Detail from '@/views/detail.vue'
 // 将路由挂载在vue实例上
 Vue.use(VueRouter)
 const router = new VueRouter({
@@ -51,6 +52,11 @@ const router = new VueRouter({
       name: 'Search',
       path: '/search',
       component: Search
+    },
+    {
+      name: 'Detail',
+      path: '/detail/:id',
+      component: Detail
     }
   ]
 })
