@@ -21,6 +21,7 @@
       :title="value.name"
       v-for="(value,index) in categoryList" :key="index"
       >
+      <!-- 上拉加载更多 -->
         <van-list
           v-model="value.loading"
           loading-text="玩命加载中..."
@@ -30,7 +31,11 @@
           :immediate-check='false'
           @load="onLoad"
         >
-          <articel v-for="(sv,si) in value.artList" :key="si" :post="sv"></articel>
+        <!-- 下拉刷新 -->
+        <van-pull-refresh v-model="value.isLoading" @refresh="onRefresh">
+          <articel v-for="(sv,si) in value.artList" :key="si" :post="sv" @click="toDetail"></articel>
+        </van-pull-refresh>
+
         </van-list>
       </van-tab>
 
@@ -62,6 +67,24 @@ export default {
     }
   },
   methods: {
+    toDetail () {
+      console.log('aaa')
+    },
+    // 下拉刷新
+    onRefresh () {
+      // 先将数据重置
+      console.log(123)
+      this.categoryList[this.active].pageIndex = 1
+      this.categoryList[this.active].artList.length = 0
+      this.init(() => {
+        setTimeout(() => {
+          this.categoryList[this.active].isLoading = false
+          // 将下拉刷新的结束标识进行重置,如果没有重置,那么有可能就不能再上拉加载更多数据了
+          this.categoryList[this.active].finished = false
+        }, 0)
+      })
+    // 加载成功后将isLoading重置为false
+    },
     // 上拉加载更多
     onLoad () {
       // 每次上拉都需要将页数增加
@@ -69,9 +92,10 @@ export default {
       this.init()
     },
     // 根据id来获取数据
-    async init () {
+    async init (callback) {
       const res = await getOnecategory({ pageIndex: this.categoryList[this.active].pageIndex, pageSize: this.categoryList[this.active].pageSize, category: this.categoryList[this.active].id })
       // console.log(res)
+      callback && callback()
       // 将获取到的数据赋值给哪一项的articleList
       this.categoryList[this.active].artList.push(...res.data.data)
       this.categoryList[this.active].loading = false
@@ -105,7 +129,8 @@ export default {
         pageIndex: 1,
         pageSize: 5,
         finished: false,
-        loading: false
+        loading: false,
+        isLoading: false // 下拉刷新的标识
       }
     })
   },
