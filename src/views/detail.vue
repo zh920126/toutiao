@@ -13,9 +13,9 @@
       </p>
       <div class="content" v-html="article.content"></div>
       <div class="dianzan">
-        <p @click="postlike">
+        <p @click="postlike" :class="{red:article.has_like===true}">
           <van-icon name="good-job-o" />
-          <span>{{article.comment_length}}</span>
+          <span>{{article.like_length}}</span>
         </p>
         <p>
           <van-icon name="chat" color="green"/>
@@ -76,9 +76,26 @@ export default {
   },
   methods: {
     // 文章点赞
-    postlike () {
-      console.log(123)
-      postlike()
+    async postlike () {
+      console.log(this.article.has_like)
+      const res = await postlike(this.article.user.id)
+      console.log(res)
+      if (res.data.message === '点赞成功') {
+        // 点赞成功提示用户，并增加样式
+        Toast({
+          type: 'success',
+          message: '点赞成功'
+        })
+        ++this.article.like_length
+        this.article.has_like = true
+      } else {
+        Toast({
+          type: 'success',
+          message: '已取消点赞'
+        })
+        --this.article.like_length
+        this.article.has_like = false
+      }
     },
     // 点击关注按钮
     async attention () {
@@ -117,7 +134,7 @@ export default {
     const res = await getDetailById(this.$route.params.id)
     console.log(res)
     this.article = res.data.data
-    // 进入页面就需要判断是否已关注过
+    // 进入页面就需要判断是否已关注过,
     this.Isattention = res.data.data.has_follow
     if (res.data.data.has_follow) {
       this.attentionv = '已关注'
@@ -125,6 +142,12 @@ export default {
     } else {
       this.attentionv = '关注'
       this.Isattention = false
+    }
+    // 判断是否已经点赞过
+    if (res.data.data.has_like) {
+      this.article.has_like = true
+    } else {
+      this.article.has_like = false
     }
   },
   components: {
@@ -203,7 +226,7 @@ export default {
   }
   .red{
     border: 1px solid red!important;
-    color: red;
+    color: red!important;
   }
   .detail-video{
     width: 100%;

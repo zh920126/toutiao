@@ -47,3 +47,11 @@ export const postlike = (id) => {
     url: `/post_like/${id}`
   })
 }
+
+// 用户关注列表
+export const userfollows = () => {
+  return axios({
+    method: 'get',
+    url: '/user_follows'
+  })
+}

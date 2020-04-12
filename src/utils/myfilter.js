@@ -1,5 +1,6 @@
-export const myfilter = (data, spe) => {
-  spe = spe || '-'
+export const myfilter = () => {
+  const data = new Date()
+  const spe = '-'
   const years = data.getFullYear()
   const months = data.getMonth() + 1
   const days = data.getDate()
