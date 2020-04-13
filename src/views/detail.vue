@@ -40,18 +40,18 @@
           <img :src="article.user.head_img" alt />
           <span>{{article.user.nickname}}</span>
         </p>
-        <p>关注</p>
+        <p @click="attention" :class="{red:Isattention===true}">{{attentionv}}</p>
       </div>
       <h2>{{article.title}}</h2>
       <div class="dianzan">
-        <p>
-          <van-icon name="good-job-o" />
-          <span>{{article.comment_length}}</span>
-        </p>
-        <p>
-          <van-icon name="chat" color="green" />
-          <span>微信</span>
-        </p>
+        <p @click="postlike" :class="{red:article.has_like===true}">
+            <van-icon name="good-job-o" />
+            <span>{{article.like_length}}</span>
+          </p>
+          <p>
+            <van-icon name="chat" color="green" />
+            <span>微信</span>
+          </p>
       </div>
     </div>
     <div class="commentList">

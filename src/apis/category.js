@@ -88,3 +88,22 @@ export const publishComment = (id, data) => {
     data
   })
 }
+
+// 搜索文章
+export const searchPost = (keyword) => {
+  return axios({
+    method: 'get',
+    url: '/post_search',
+    params: {
+      keyword
+    }
+  })
+}
+
+// 搜索推荐
+export const searchRecommend = () => {
+  return axios({
+    type: 'get',
+    url: '/post_search_recommend'
+  })
+}
