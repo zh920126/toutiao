@@ -1,9 +1,9 @@
 <template>
-  <div class="myfooter">
+  <div class="commonfooter">
     <div class="box1" v-if="isShow">
       <input type="text" placeholder="写跟帖" @focus="getFocus">
       <van-icon class="iconfont" name="comment-o" />
-      <van-icon class="iconfont" name="star-o" />
+      <van-icon class="iconfont" :class="{red:post.has_star}" name="star-o" @click="getstar"/>
       <van-icon class="iconfont" name="cluster-o" />
     </div>
     <div class="demo" v-else>
@@ -17,13 +17,37 @@
 </template>
 
 <script>
+import { myStar } from '@/apis/category.js'
+import { Toast } from 'vant'
 export default {
+  props: ['post'],
   data () {
     return {
-      isShow: true
+      isShow: true,
+      isStar: false
     }
   },
   methods: {
+    // 文章收藏
+    async getstar () {
+      console.log(this.post)
+      const res = await myStar(this.post.id)
+      console.log(res)
+      if (res.data.message === '收藏成功') {
+        // 提示用户
+        Toast({
+          type: 'success',
+          message: '收藏成功'
+        })
+        this.post.has_star = true
+      } else {
+        Toast({
+          type: 'success',
+          message: '取消收藏成功'
+        })
+        this.post.has_star = false
+      }
+    },
     getFocus () {
       this.isShow = !this.isShow
     },
@@ -35,7 +59,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .myfooter{
+.red{
+    color: red!important;
+  }
+  .commonfooter{
     position: fixed;
     left: 0;
     bottom: 0;

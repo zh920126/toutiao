@@ -55,3 +55,11 @@ export const userfollows = () => {
     url: '/user_follows'
   })
 }
+
+// 收藏文章
+export const myStar = (id) => {
+  return axios({
+    method: 'get',
+    url: `/post_star/${id}`
+  })
+}

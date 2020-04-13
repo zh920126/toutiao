@@ -23,7 +23,7 @@
         </p>
       </div>
     </div>
-    <myfooter class="myfooter"></myfooter>
+    <commonfooter class="commonfooter" :post="article"></commonfooter>
   </div>
   <!-- 显示视频 -->
   <div class="detail-video" v-else>
@@ -50,12 +50,13 @@
           <span>微信</span>
         </p>
       </div>
-      <myfooter></myfooter>
+      <!-- 将文章数据传给子组件内，用于文章收藏功能 -->
+      <commonfooter :post="article"></commonfooter>
   </div>
 </template>
 
 <script>
-import myfooter from '@/components/myfooter.vue'
+import commonfooter from '@/components/commonfooter.vue'
 import { getDetailById, userFollow, unuserFollow, postlike } from '@/apis/category.js'
 import { Toast } from 'vant'
 export default {
@@ -77,9 +78,8 @@ export default {
   methods: {
     // 文章点赞
     async postlike () {
-      console.log(this.article.has_like)
       const res = await postlike(this.article.user.id)
-      console.log(res)
+      // console.log(res)
       if (res.data.message === '点赞成功') {
         // 点赞成功提示用户，并增加样式
         Toast({
@@ -132,7 +132,7 @@ export default {
   // 根据ID来获取文章的数据
   async created () {
     const res = await getDetailById(this.$route.params.id)
-    console.log(res)
+    // console.log(res)
     this.article = res.data.data
     // 进入页面就需要判断是否已关注过,
     this.Isattention = res.data.data.has_follow
@@ -151,7 +151,7 @@ export default {
     }
   },
   components: {
-    myfooter
+    commonfooter
   }
 }
 </script>
@@ -217,7 +217,7 @@ export default {
         }
       }
     }
-    .myfooter{
+    .commonfooter{
       position: fixed;
       left: 0;
       bottom: 0;
@@ -291,7 +291,7 @@ export default {
         }
       }
     }
-    .myfooter{
+    .commonfooter{
       position: fixed;
       left: 0;
       bottom: 0;
