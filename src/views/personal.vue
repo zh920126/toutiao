@@ -17,7 +17,7 @@
     </router-link>
     <mycell title="我的关注" desc="关注的用户" @click="$router.push({name:'Myfollow'})"></mycell>
     <mycell title="我的跟帖" desc="跟帖/回复"></mycell>
-    <mycell title="我的收藏" desc="文章/视频"></mycell>
+    <mycell title="我的收藏" desc="文章/视频" @click="$router.push({name:'Mystar'})"></mycell>
     <mycell title="设置" desc></mycell>
     <div class="bottom">
       <p @click="logout">退出登录</p>
@@ -127,7 +127,6 @@ a {
 }
 .bottom {
   position: fixed;
-  bottom: 0;
   left: 0;
   display: flex;
   width: 100%;

@@ -22,6 +22,7 @@ export default {
     justify-content: space-between;
     padding: 20/360*100vw;
     font-size: 14/360*100vw;
+    background: #f2f2f2;
     h2{
       font-weight: 600;
     }

@@ -63,3 +63,28 @@ export const myStar = (id) => {
     url: `/post_star/${id}`
   })
 }
+
+// 获取用户收藏文章的列表
+export const userStar = () => {
+  return axios({
+    type: 'get',
+    url: '/user_star'
+  })
+}
+
+// 获取评论列表
+export const comment = (id) => {
+  return axios({
+    type: 'get',
+    url: `/post_comment/${id}`
+  })
+}
+
+// 发布评论
+export const publishComment = (id, data) => {
+  return axios({
+    method: 'post',
+    url: `/post_comment/${id}`,
+    data
+  })
+}

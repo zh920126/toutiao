@@ -13,6 +13,8 @@ import Index from '@/views/index.vue'
 import Search from '@/views/search.vue'
 import Detail from '@/views/detail.vue'
 import Myfollow from '@/views/myfollow.vue'
+import Mystar from '@/views/myStar.vue'
+import Comments from '@/views/comments.vue'
 // 将路由挂载在vue实例上
 Vue.use(VueRouter)
 const router = new VueRouter({
@@ -63,6 +65,16 @@ const router = new VueRouter({
       name: 'Myfollow',
       path: '/myfollow',
       component: Myfollow
+    },
+    {
+      name: 'Mystar',
+      path: '/mystar',
+      component: Mystar
+    },
+    {
+      name: 'Comments',
+      path: '/comments/:id',
+      component: Comments
     }
   ]
 })

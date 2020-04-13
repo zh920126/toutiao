@@ -61,7 +61,7 @@ export default {
       // console.log(this.categoryList[this.active].id)
       // 根据ID来获取到当前对应ID的数据
       if (this.categoryList[this.active].artList.length === 0) {
-        console.log(111)
+        // console.log(111)
         this.init()
       }
     }
